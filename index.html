@@ -1278,7 +1278,6 @@ body{
         opacity:0;
         transform:translateY(-90px) scale(1.1);
     }
-
 }
 
 @media(max-width:700px){
@@ -1803,34 +1802,18 @@ body{
 
 <!-- =========================================================
      AUDIO
-     SOLO MUSICA.mp3 CAMBIADO A URL DIRECTA
 ========================================================= -->
 
-<audio
-    id="music"
-    loop
-    preload="auto"
-    src="https://github.com/kiusama0001-spec/kaluu/raw/refs/heads/main/Musica.mp3">
+<audio id="music" loop preload="auto">
+    <source src="Musica.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="meow"
-    preload="auto">
-
-    <source
-        src="Maullido.mp3"
-        type="audio/mpeg">
-
+<audio id="meow" preload="auto">
+    <source src="Maullido.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="bell"
-    preload="auto">
-
-    <source
-        src="Cascabel.mp3"
-        type="audio/mpeg">
-
+<audio id="bell" preload="auto">
+    <source src="Cascabel.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -1874,10 +1857,6 @@ function pressPin(number){
 
     updateDots();
 
-    /*
-     * La música se intenta iniciar directamente
-     * desde el clic del último número correcto.
-     */
     if(pin.length === 4 && pin === correctPin){
 
         startMusic();
