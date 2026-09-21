@@ -1881,6 +1881,16 @@ function pressPin(number){
 
     updateDots();
 
+    /*
+     * La música se inicia directamente desde el clic
+     * del último número correcto del PIN.
+     */
+    if(pin.length === 4 && pin === correctPin){
+
+        startMusic();
+
+    }
+
     playBell();
 
     if(pin.length === 4){
@@ -1906,16 +1916,6 @@ function clearPin(){
 function checkPin(){
 
     if(pin === correctPin){
-
-        /*
-         * IMPORTANTE:
-         * La música se inicia aquí directamente,
-         * aprovechando el clic/tap que introdujo la contraseña.
-         * Antes estaba dentro de un setTimeout y el navegador
-         * podía bloquearla por considerarla reproducción automática.
-         */
-
-        startMusic();
 
         lock.classList.add("hidden");
 
@@ -1970,24 +1970,37 @@ function startMusic(){
     const music =
         document.getElementById("music");
 
-    music.volume=.28;
+    const btn =
+        document.getElementById("musicBtn");
 
-    music.play()
-        .then(()=>{
+    music.volume = 0.28;
 
-            document
-                .getElementById("musicBtn")
-                .textContent="🔊";
+    /*
+     * Forzamos la carga del archivo antes de reproducirlo.
+     */
+    music.load();
 
-        })
-        .catch((error)=>{
+    const promise =
+        music.play();
 
-            console.log(
-                "No se pudo reproducir Musica.mp3:",
+    if(promise !== undefined){
+
+        promise.then(()=>{
+
+            btn.textContent = "🔊";
+
+        }).catch((error)=>{
+
+            console.error(
+                "ERROR CON Musica.mp3:",
                 error
             );
 
+            btn.textContent = "🔇";
+
         });
+
+    }
 
 }
 
@@ -2007,7 +2020,14 @@ function toggleMusic(){
                 btn.textContent="🔊";
 
             })
-            .catch(()=>{});
+            .catch((error)=>{
+
+                console.error(
+                    "ERROR CON Musica.mp3:",
+                    error
+                );
+
+            });
 
     }else{
 
