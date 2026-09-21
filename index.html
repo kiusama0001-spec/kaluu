@@ -802,7 +802,7 @@ body{
 }
 
 /* =========================================================
-   GATO BLANCO Y NEGRO
+   GATO
 ========================================================= */
 
 .cat-world{
@@ -1150,10 +1150,6 @@ body{
     background:#222;
 }
 
-/* =========================================================
-   ESTADOS DEL GATO
-========================================================= */
-
 .cat.happy{
     animation:catHappy .5s ease-in-out 2;
 }
@@ -1284,10 +1280,6 @@ body{
     }
 
 }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media(max-width:700px){
 
@@ -1809,15 +1801,16 @@ body{
 
 </div>
 
+<!-- =========================================================
+     AUDIO
+     SOLO MUSICA.mp3 CAMBIADO A URL DIRECTA
+========================================================= -->
+
 <audio
     id="music"
     loop
-    preload="auto">
-
-    <source
-        src="Musica.mp3"
-        type="audio/mpeg">
-
+    preload="auto"
+    src="https://github.com/kiusama0001-spec/kaluu/raw/refs/heads/main/Musica.mp3">
 </audio>
 
 <audio
@@ -1882,8 +1875,8 @@ function pressPin(number){
     updateDots();
 
     /*
-     * La música se inicia directamente desde el clic
-     * del último número correcto del PIN.
+     * La música se intenta iniciar directamente
+     * desde el clic del último número correcto.
      */
     if(pin.length === 4 && pin === correctPin){
 
@@ -1974,11 +1967,6 @@ function startMusic(){
         document.getElementById("musicBtn");
 
     music.volume = 0.28;
-
-    /*
-     * Forzamos la carga del archivo antes de reproducirlo.
-     */
-    music.load();
 
     const promise =
         music.play();
